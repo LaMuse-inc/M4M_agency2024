@@ -58,7 +58,7 @@
     <!-- About セクション -->
     <section id="about" class="about">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header center">
                 <h2 class="section-title">Future Icons.</h2>
             </div>
             <div class="about-grid">
@@ -306,16 +306,60 @@
                 <div class="works-column digital-column">
                     <h3 class="column-title">デジタルデザイン</h3>
                     <div class="digital-content-grid">
-                        <div id="networkDiagram" class="network-diagram-container"></div>
+                        <div class="digital-layout">
+                            <div class="network-diagram-responsive">
+                                <!-- SVGネットワーク図 -->
+                                <svg class="network-svg" viewBox="0 0 480 340" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- 接続線 -->
+                                    <g class="connection-lines">
+                                        <line x1="240" y1="125" x2="240" y2="70" stroke="#9CA3AF" stroke-width="2"/>
+                                        <line x1="285" y1="170" x2="343" y2="170" stroke="#9CA3AF" stroke-width="2"/>
+                                        <line x1="240" y1="215" x2="240" y2="270" stroke="#9CA3AF" stroke-width="2"/>
+                                        <line x1="195" y1="170" x2="137" y2="170" stroke="#9CA3AF" stroke-width="2"/>
+                                    </g>
+                                    
+                                    <!-- サービス円 -->
+                                    <g class="service-circles">
+                                        <!-- フライヤーデザイン -->
+                                        <circle cx="240" cy="70" r="45" fill="#000" stroke="#fff" stroke-width="2"/>
+                                        <text x="240" y="67" text-anchor="middle" fill="white" font-size="10" font-weight="500">
+                                            <tspan x="240" dy="0">フライヤー</tspan>
+                                            <tspan x="240" dy="12">デザイン</tspan>
+                                        </text>
+                                        
+                                        <!-- ロゴデザイン -->
+                                        <circle cx="343" cy="170" r="45" fill="#000" stroke="#fff" stroke-width="2"/>
+                                        <text x="343" y="167" text-anchor="middle" fill="white" font-size="11" font-weight="500">
+                                            <tspan x="343" dy="0">ロゴ</tspan>
+                                            <tspan x="343" dy="12">デザイン</tspan>
+                                        </text>
+                                        
+                                        <!-- シルクスクリーン -->
+                                        <circle cx="240" cy="270" r="45" fill="#000" stroke="#fff" stroke-width="2"/>
+                                        <text x="240" y="267" text-anchor="middle" fill="white" font-size="9" font-weight="500">
+                                            <tspan x="240" dy="0">シルク</tspan>
+                                            <tspan x="240" dy="12">スクリーン</tspan>
+                                        </text>
+                                        
+                                        <!-- Art Work -->
+                                        <circle cx="137" cy="170" r="45" fill="#000" stroke="#fff" stroke-width="2"/>
+                                        <text x="137" y="175" text-anchor="middle" fill="white" font-size="11" font-weight="500">Art Work</text>
+                                    </g>
+                                    
+                                    <!-- 中央ロゴ -->
+                                    <circle cx="240" cy="170" r="45" fill="white" stroke="#ddd" stroke-width="2"/>
+                                    <image x="215" y="145" width="50" height="50" href="images/M4Mのロゴ.png"/>
+                                </svg>
+                            </div>
+                            
+                            <!-- PC版限定：アートワーク画像 -->
+                            <div class="artwork-showcase">
+                                <img src="images/アートワーク.jpg" loading="lazy" alt="デジタルアートワーク1" class="artwork-image">
+                                <img src="images/アートワーク2.jpg" loading="lazy" alt="デジタルアートワーク2" class="artwork-image">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- View More Projects Button -->
-            <div class="view-more-container">
-                <a href="#" class="view-more-btn">
-                    View More Projects
-                </a>
             </div>
         </div>
     </section>
@@ -495,7 +539,7 @@
                                 <option value="printing">プリント加工</option>
                                 <option value="design">デザイン制作</option>
                                 <option value="digital">デジタルデザイン</option>
-                                <option value="photography">撮影</option>
+                                <option value="photography">梱包</option>
                                 <option value="other">その他</option>
                             </select>
                         </div>

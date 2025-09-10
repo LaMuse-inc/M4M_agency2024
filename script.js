@@ -391,7 +391,11 @@ window.addEventListener('resize', throttle(() => {
 // ==========================================
 document.addEventListener('DOMContentLoaded', function() {
     const networkContainer = document.getElementById('networkDiagram');
-    if (!networkContainer) return;
+    console.log('Network container found:', networkContainer);
+    if (!networkContainer) {
+        console.log('Network container not found!');
+        return;
+    }
 
     const networkPartners = [
         { title: "Art Work\n" },
@@ -483,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoImg = document.createElement('img');
     logoImg.src = 'images/M4Mのロゴ.png';
     logoImg.alt = 'M4M';
-    logoImg.style.height = isLargeScreen ? '100px' : '60px';
+    logoImg.style.height = isLargeScreen ? '120px' : '80px';
     logoImg.style.width = 'auto';
     centerCircle.appendChild(logoImg);
     innerContainer.appendChild(centerCircle);
@@ -521,4 +525,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         innerContainer.appendChild(partnerCircle);
     });
+    
+    console.log('Network diagram created successfully!');
 });

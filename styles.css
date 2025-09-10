@@ -385,6 +385,10 @@ section + section {
     grid-column: 1 / -1;
 }
 
+.about .section-header.center {
+    text-align: center;
+}
+
 .about .section-title {
     font-size: clamp(3rem, 7vw, 5rem);
     line-height: 1;
@@ -432,14 +436,12 @@ section + section {
 
 .stats {
     display: flex;
-    gap: 3.5rem;
+    gap: 4rem;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
     margin-top: 4rem;
-    padding: 4rem 0;
+    padding: 2rem 0;
     max-width: 100%;
-    overflow: hidden;
-    position: relative;
 }
 
 .stat-item {
@@ -449,32 +451,15 @@ section + section {
     gap: 1.2rem;
     position: relative;
     flex: 1;
-    padding: 2rem 2.5rem;
-    min-height: 140px;
+    padding: 2rem 1.5rem;
+    min-height: auto;
     justify-content: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    cursor: pointer;
+    transition: all 0.3s ease;
     text-align: center;
 }
 
 .stat-item:hover {
-    transform: translateY(-4px) scale(1.02);
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1);
-}
-
-.stat-item:focus {
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-}
-
-.stat-item:active {
-    transform: translateY(-2px) scale(1.01);
+    transform: translateY(-2px);
 }
 
 .stat-item:hover .stat-number {
@@ -486,19 +471,6 @@ section + section {
     color: rgba(255, 255, 255, 0.95);
 }
 
-.stat-item:first-child {
-    padding-left: 0;
-}
-
-.stat-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: -1.5rem;
-    top: 20%;
-    height: 60%;
-    width: 1px;
-    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-}
 
 .stat-number {
     display: block;
@@ -1106,11 +1078,106 @@ section + section {
     min-height: 340px;
 }
 
+/* Digital Layout */
+.digital-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Digital Design Images */
+.digital-design-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.digital-image-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.digital-image-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.digital-design-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.digital-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 1.5rem 1rem 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.digital-image-item:hover .digital-image-overlay {
+    transform: translateY(0);
+}
+
+.digital-image-overlay h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.digital-image-overlay p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0.9;
+    margin: 0;
+}
+
 /* PC specific styles for network diagram */
 @media (min-width: 1024px) {
     .network-diagram-container {
-        min-height: 612px;
+        min-height: 400px;
     }
+    
+    .digital-layout {
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .network-diagram-container {
+        flex: 2;
+        min-height: 400px;
+    }
+    
+    .digital-design-images {
+        flex: 1;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    .digital-design-img {
+        height: 120px;
+    }
+    
+    .digital-image-overlay h4 {
+        font-size: 0.9rem;
+    }
+    
+    .digital-image-overlay p {
+        font-size: 0.8rem;
+    }
+}
     
     .digital-content-grid {
         padding: 2rem;
@@ -1256,11 +1323,86 @@ section + section {
     transform: none;
 }
 
+/* SVGネットワーク図のスタイル */
+.network-diagram-responsive {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    background: transparent;
+}
+
+.network-svg {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    background: transparent;
+}
+
+
+.network-svg text {
+    font-family: 'Noto Sans JP', sans-serif;
+    pointer-events: none;
+}
+
+/* PC版限定：アートワーク画像 */
+.digital-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.artwork-showcase {
+    display: none;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.artwork-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* PC版（1024px以上）でのみアートワーク画像を表示 */
+@media (min-width: 1024px) {
+    .digital-layout {
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .network-diagram-responsive {
+        flex: 0 0 auto;
+        max-width: 480px;
+        justify-content: flex-start;
+    }
+    
+    .artwork-showcase {
+        display: flex;
+        flex: 1;
+        max-width: 400px;
+        justify-content: flex-start;
+    }
+}
+
 /* Responsive Design for Digital Content */
 @media (max-width: 768px) {
     .digital-content-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1rem;
+    }
+    
+    .network-diagram-responsive {
+        padding: 0.25rem;
+    }
+    
+    .network-svg {
+        max-width: 100%;
     }
     
     .digital-network-small {
@@ -1275,6 +1417,23 @@ section + section {
 }
 
 @media (max-width: 480px) {
+    .network-diagram-responsive {
+        padding: 0.25rem;
+    }
+    
+    .network-svg {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .network-svg text {
+        font-size: 10px;
+    }
+    
+    .network-svg circle[r="45"] {
+        r: 40;
+    }
+    
     .flyer-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -1795,7 +1954,7 @@ section + section {
    フッター
    ========================================== */
 .footer {
-    background: linear-gradient(135deg, #0a0a0a 0%, #000000 50%, #0f0f0f 100%);
+    background: #000000;
     color: white;
     padding: 2rem 0;
     text-align: center;
@@ -2221,7 +2380,6 @@ section.about .logo-video-right {
   .digital-network .dn-line-bottom { bottom: calc(0.5rem + 100px); height: calc(50% - (0.5rem + 50px)); }
   .digital-network .dn-line-left { left: calc(0.5rem + 100px); width: calc(50% - (0.5rem + 50px)); }
   .digital-network .dn-line-right { right: calc(0.5rem + 100px); width: calc(50% - (0.5rem + 50px)); }
-}
 }
 
 @media (max-width: 768px) {
@@ -2839,7 +2997,7 @@ section.about .logo-video-right {
    フッター
    ========================================== */
 .footer {
-    background: linear-gradient(135deg, #0a0a0a 0%, #000000 50%, #0f0f0f 100%);
+    background: #000000;
     color: white;
     padding: 2rem 0;
     text-align: center;
