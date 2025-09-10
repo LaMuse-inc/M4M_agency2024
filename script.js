@@ -12,6 +12,29 @@ document.addEventListener('DOMContentLoaded', function() {
         navMenu.classList.toggle('active');
         // ハンバーガーメニューのアニメーション
         navToggle.classList.toggle('active');
+        // Update aria-expanded
+        const isExpanded = navMenu.classList.contains('active');
+        navToggle.setAttribute('aria-expanded', isExpanded);
+        navToggle.setAttribute('aria-label', isExpanded ? 'メニューを閉じる' : 'メニューを開く');
+        // Body scroll lock
+        document.body.style.overflow = isExpanded ? 'hidden' : '';
+        
+        // Create overlay
+        let overlay = document.querySelector('.nav-overlay');
+        if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'nav-overlay';
+            document.body.appendChild(overlay);
+        }
+        overlay.classList.toggle('active');
+        
+        // Close menu on overlay click
+        overlay.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
     });
 
     // ナビゲーションリンククリックでメニューを閉じる
@@ -19,6 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+            const overlay = document.querySelector('.nav-overlay');
+            if (overlay) overlay.classList.remove('active');
         });
     });
 
@@ -359,3 +385,140 @@ window.addEventListener('resize', throttle(() => {
     // レスポンシブ対応の処理
     console.log('Window resized');
 }, 200));
+
+// ==========================================
+// Network Diagram
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const networkContainer = document.getElementById('networkDiagram');
+    if (!networkContainer) return;
+
+    const networkPartners = [
+        { title: "Art Work\n" },
+        { title: "シルクスクリーン\n" },
+        { title: "ロゴデザイン\n" },
+        { title: "フライヤーデザイン\n" }
+    ];
+
+    // Base size for mobile/tablet
+    const baseWidth = 520;
+    const baseHeight = 520;
+    
+    // Scale up for PC (lg screens and above)
+    const isLargeScreen = window.innerWidth >= 1024;
+    const scale = isLargeScreen ? 1.6 : 1.0;
+    
+    const containerWidth = baseWidth * scale;
+    const containerHeight = baseHeight * scale;
+    const centerX = containerWidth / 2;
+    const centerY = containerHeight / 2;
+    const radiusX = 180 * scale;
+    const radiusY = 180 * scale;
+    const centerRadius = 65 * scale;
+    const partnerRadius = 70 * scale;
+
+    // Create the container
+    networkContainer.style.position = 'relative';
+    networkContainer.style.width = '100%';
+    networkContainer.style.height = isLargeScreen ? '800px' : '520px';
+    networkContainer.style.display = 'flex';
+    networkContainer.style.alignItems = 'center';
+    networkContainer.style.justifyContent = 'center';
+
+    // Create inner container
+    const innerContainer = document.createElement('div');
+    innerContainer.style.position = 'relative';
+    innerContainer.style.width = containerWidth + 'px';
+    innerContainer.style.height = containerHeight + 'px';
+    innerContainer.style.transform = 'translateX(0)';
+    networkContainer.appendChild(innerContainer);
+
+    // Create SVG for lines
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.style.position = 'absolute';
+    svg.style.inset = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.pointerEvents = 'none';
+    svg.setAttribute('width', containerWidth);
+    svg.setAttribute('height', containerHeight);
+
+    // Draw connection lines
+    networkPartners.forEach((_, index) => {
+        const angle = (index * 90) * (Math.PI / 180);
+        const outerX = centerX + radiusX * Math.cos(angle);
+        const outerY = centerY + radiusY * Math.sin(angle);
+        const innerX = centerX + centerRadius * Math.cos(angle);
+        const innerY = centerY + centerRadius * Math.sin(angle);
+        
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', innerX);
+        line.setAttribute('y1', innerY);
+        line.setAttribute('x2', outerX);
+        line.setAttribute('y2', outerY);
+        line.setAttribute('stroke', '#9CA3AF');
+        line.setAttribute('stroke-width', '2');
+        svg.appendChild(line);
+    });
+
+    innerContainer.appendChild(svg);
+
+    // Create center circle with logo
+    const centerCircle = document.createElement('div');
+    centerCircle.style.position = 'absolute';
+    centerCircle.style.width = (centerRadius * 2) + 'px';
+    centerCircle.style.height = (centerRadius * 2) + 'px';
+    centerCircle.style.backgroundColor = 'white';
+    centerCircle.style.borderRadius = '50%';
+    centerCircle.style.display = 'flex';
+    centerCircle.style.alignItems = 'center';
+    centerCircle.style.justifyContent = 'center';
+    centerCircle.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+    centerCircle.style.zIndex = '10';
+    centerCircle.style.transform = 'translate(-50%, -50%)';
+    centerCircle.style.left = centerX + 'px';
+    centerCircle.style.top = centerY + 'px';
+    centerCircle.style.border = '1px solid #e5e7eb';
+
+    const logoImg = document.createElement('img');
+    logoImg.src = 'images/M4Mのロゴ.png';
+    logoImg.alt = 'M4M';
+    logoImg.style.height = isLargeScreen ? '100px' : '60px';
+    logoImg.style.width = 'auto';
+    centerCircle.appendChild(logoImg);
+    innerContainer.appendChild(centerCircle);
+
+    // Create partner circles
+    networkPartners.forEach((partner, index) => {
+        const angle = (index * 90) * (Math.PI / 180);
+        const x = centerX + radiusX * Math.cos(angle);
+        const y = centerY + radiusY * Math.sin(angle);
+        
+        const partnerCircle = document.createElement('div');
+        partnerCircle.style.position = 'absolute';
+        partnerCircle.style.width = (partnerRadius * 2) + 'px';
+        partnerCircle.style.height = (partnerRadius * 2) + 'px';
+        partnerCircle.style.backgroundColor = 'black';
+        partnerCircle.style.color = 'white';
+        partnerCircle.style.borderRadius = '50%';
+        partnerCircle.style.display = 'flex';
+        partnerCircle.style.alignItems = 'center';
+        partnerCircle.style.justifyContent = 'center';
+        partnerCircle.style.fontSize = isLargeScreen ? '18px' : '15px';
+        partnerCircle.style.fontWeight = '600';
+        partnerCircle.style.textAlign = 'center';
+        partnerCircle.style.lineHeight = '1.3';
+        partnerCircle.style.transform = 'translate(-50%, -50%)';
+        partnerCircle.style.left = x + 'px';
+        partnerCircle.style.top = y + 'px';
+        partnerCircle.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+
+        const span = document.createElement('span');
+        span.style.whiteSpace = 'nowrap';
+        span.style.padding = isLargeScreen ? '0 12px' : '0 10px';
+        span.textContent = partner.title;
+        partnerCircle.appendChild(span);
+        
+        innerContainer.appendChild(partnerCircle);
+    });
+});

@@ -9,17 +9,20 @@
     <link rel="icon" type="image/png" sizes="48x48" href="images/M4Mのロゴ.png">
     <link rel="icon" type="image/png" sizes="64x64" href="images/M4Mのロゴ.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/M4Mのロゴ.png">
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=1017">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Noto+Sans+JP:wght@300;400;500;700&family=Bodoni+Moda:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Skip to main content -->
+    <a href="#main" class="skip-link">メインコンテンツへスキップ</a>
+    
     <!-- ヘッダー -->
     <header class="header" id="header">
         <nav class="nav">
             <a href="#" class="logo">
-                <img src="images/M4Mのロゴ.png" alt="M4M AGENCY" class="logo-image">
+                <img src="images/M4Mのロゴ.png" loading="lazy" alt="M4M AGENCY" class="logo-image">
                 <div class="logo-text-container">
                     <span class="logo-text">M4M AGENCY</span>
                 </div>
@@ -30,15 +33,16 @@
                 <li><a href="#works" class="nav-link">Works</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="nav-toggle" id="navToggle">
+            <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </header>
 
     <!-- ヒーローセクション -->
+    <main id="main">
     <section class="hero">
         <div class="hero-content">
             <h1 class="hero-title">
@@ -105,7 +109,7 @@
             <div class="service-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://via.placeholder.com/240x240/f8f9fa/333333?text=デザイン" alt="デザインサービス">
+                        <img src="images/デザイン.jpg" loading="lazy" alt="デザインサービス">
                     </div>
                     <h3 class="service-title">デザイン</h3>
                     <p class="service-description">
@@ -115,7 +119,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://via.placeholder.com/240x240/f8f9fa/333333?text=生産" alt="生産サービス">
+                        <img src="images/縫製工場.png" loading="lazy" alt="生産サービス">
                     </div>
                     <h3 class="service-title">生産</h3>
                     <p class="service-description">
@@ -125,7 +129,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://via.placeholder.com/240x240/f8f9fa/333333?text=プロモ" alt="プロモーションサービス">
+                        <img src="images/プロモーションサービス.png" loading="lazy" alt="プロモーションサービス">
                     </div>
                     <h3 class="service-title">プロモーション</h3>
                     <p class="service-description">
@@ -135,7 +139,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://via.placeholder.com/240x240/f8f9fa/333333?text=梱包" alt="梱包サービス">
+                        <img src="images/梱包.png" loading="lazy" alt="梱包サービス">
                     </div>
                     <h3 class="service-title">梱包</h3>
                     <p class="service-description">
@@ -164,7 +168,7 @@
                     <div class="works-grid-column">
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_5.jpg" alt="M4M VISIONS Tシャツ">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_5.jpg" loading="lazy" alt="M4M VISIONS Tシャツ">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>M4M VISIONS</h3>
@@ -175,7 +179,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_1.jpg" alt="プリント実績1">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_1.jpg" loading="lazy" alt="プリント実績1">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>カスタムプリント</h3>
@@ -186,7 +190,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_2.jpg" alt="プリント実績2">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_2.jpg" loading="lazy" alt="プリント実績2">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>アパレル制作</h3>
@@ -197,7 +201,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_3.jpg" alt="プリント実績3">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_3.jpg" loading="lazy" alt="プリント実績3">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>カスタムデザイン</h3>
@@ -208,7 +212,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_4.jpg" alt="プリント実績4">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_4.jpg" loading="lazy" alt="プリント実績4">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>特殊プリント</h3>
@@ -219,7 +223,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_6.jpg" alt="プリント実績6">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_6.jpg" loading="lazy" alt="プリント実績6">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>ブランディング</h3>
@@ -230,7 +234,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_1.jpg" alt="限定Tシャツ">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_1.jpg" loading="lazy" alt="限定Tシャツ">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>限定Tシャツ</h3>
@@ -241,7 +245,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_2.jpg" alt="コラボレーション">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_2.jpg" loading="lazy" alt="コラボレーション">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>コラボレーション</h3>
@@ -252,7 +256,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_3.jpg" alt="ヴィンテージスタイル">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_3.jpg" loading="lazy" alt="ヴィンテージスタイル">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>ヴィンテージスタイル</h3>
@@ -263,7 +267,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_4.jpg" alt="ストリートウェア">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_4.jpg" loading="lazy" alt="ストリートウェア">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>ストリートウェア</h3>
@@ -274,7 +278,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_6.jpg" alt="テクニカルウェア">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_6.jpg" loading="lazy" alt="テクニカルウェア">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>テクニカルウェア</h3>
@@ -285,7 +289,7 @@
                         </div>
                         <div class="work-item">
                             <div class="work-image">
-                                <img src="images/LINE_ALBUM_製作実績20250816_250820_7.jpg" alt="カジュアルウェア">
+                                <img src="images/LINE_ALBUM_製作実績20250816_250820_7.jpg" loading="lazy" alt="カジュアルウェア">
                                 <div class="work-overlay"></div>
                                 <div class="work-info">
                                     <h3>カジュアルウェア</h3>
@@ -302,16 +306,7 @@
                 <div class="works-column digital-column">
                     <h3 class="column-title">デジタルデザイン</h3>
                     <div class="digital-content-grid">
-                        <div class="digital-network-optimized" role="img" aria-label="M4M デジタルデザイン実績図">
-                            <div class="dn-center-responsive">
-                                <img src="images/デジタルデザイン実績図の説明.png" 
-                                     alt="M4M デジタルデザイン実績図" 
-                                     class="dn-logo-responsive" 
-                                     loading="lazy">
-                            </div>
-                            <div class="dn-line dn-line-top-responsive"></div>
-                            <div class="dn-line dn-line-right-responsive"></div>
-                        </div>
+                        <div id="networkDiagram" class="network-diagram-container"></div>
                     </div>
                 </div>
             </div>
@@ -541,6 +536,7 @@
             </div>
         </div>
     </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>
