@@ -111,8 +111,8 @@ body {
 /* .logo:hover - ホバーエフェクトを無効化 */
 
 .logo-image {
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
     transition: var(--transition-base);
 }
