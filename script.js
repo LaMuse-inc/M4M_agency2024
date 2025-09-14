@@ -158,38 +158,166 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==========================================
-    // フォーム送信処理
+    // EmailJS初期化とフォーム送信処理
     // ==========================================
+    
+    // EmailJS初期化（あなたのUser IDに置き換えてください）
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init("YOUR_USER_ID"); // ここを実際のUser IDに置き換え
+    }
+    
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // フォームデータを取得
-            const formData = new FormData(contactForm);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+            // バリデーション
+            if (!validateForm()) {
+                return;
+            }
             
-            // ここで実際の送信処理を行う
-            // 現在はコンソールに出力するだけ
-            console.log('フォームデータ:', data);
-            
-            // 送信成功のフィードバック
             const submitBtn = contactForm.querySelector('.submit-btn');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span>送信完了！</span>';
-            submitBtn.style.background = '#000000';
             
-            // フォームをリセット
-            setTimeout(() => {
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.background = '';
-            }, 3000);
+            // 送信中状態
+            submitBtn.innerHTML = '<span>送信中...</span>';
+            submitBtn.disabled = true;
+            submitBtn.style.background = '#666666';
+            
+            // EmailJSでメール送信
+            if (typeof emailjs !== 'undefined') {
+                emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                    .then(function() {
+                        // 送信成功
+                        submitBtn.innerHTML = '<span>送信完了！</span>';
+                        submitBtn.style.background = '#4CAF50';
+                        contactForm.reset();
+                        
+                        // 成功メッセージを表示
+                        showSuccessMessage('お問い合わせありがとうございます。24時間以内にご返信いたします。');
+                        
+                        setTimeout(() => {
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.style.background = '';
+                            submitBtn.disabled = false;
+                        }, 3000);
+                    }, function(error) {
+                        // 送信エラー
+                        console.log('FAILED...', error);
+                        submitBtn.innerHTML = '<span>送信エラー</span>';
+                        submitBtn.style.background = '#f44336';
+                        
+                        // エラーメッセージを表示
+                        showErrorMessage('送信に失敗しました。しばらく経ってから再度お試しください。');
+                        
+                        setTimeout(() => {
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.style.background = '';
+                            submitBtn.disabled = false;
+                        }, 3000);
+                    });
+            } else {
+                // EmailJSが読み込まれていない場合
+                console.log('EmailJS not loaded');
+                submitBtn.innerHTML = '<span>エラー</span>';
+                submitBtn.style.background = '#f44336';
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
         });
+    }
+    
+    // フォームバリデーション
+    function validateForm() {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        if (!name) {
+            showErrorMessage('お名前を入力してください。');
+            document.getElementById('name').focus();
+            return false;
+        }
+        
+        if (!email) {
+            showErrorMessage('メールアドレスを入力してください。');
+            document.getElementById('email').focus();
+            return false;
+        }
+        
+        if (!isValidEmail(email)) {
+            showErrorMessage('正しいメールアドレスを入力してください。');
+            document.getElementById('email').focus();
+            return false;
+        }
+        
+        if (!message) {
+            showErrorMessage('メッセージを入力してください。');
+            document.getElementById('message').focus();
+            return false;
+        }
+        
+        return true;
+    }
+    
+    // メールアドレス形式チェック
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    
+    // 成功メッセージ表示
+    function showSuccessMessage(message) {
+        showMessage(message, 'success');
+    }
+    
+    // エラーメッセージ表示
+    function showErrorMessage(message) {
+        showMessage(message, 'error');
+    }
+    
+    // メッセージ表示（共通）
+    function showMessage(message, type) {
+        // 既存のメッセージを削除
+        const existingMessage = document.querySelector('.form-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+        
+        // メッセージ要素を作成
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message ${type}`;
+        messageDiv.textContent = message;
+        
+        // スタイルを適用
+        messageDiv.style.cssText = `
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+            ${type === 'success' ? 
+                'background: #d4edda; color: #155724; border: 1px solid #c3e6cb;' : 
+                'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;'
+            }
+        `;
+        
+        // フォームの上に挿入
+        const contactForm = document.getElementById('contactForm');
+        contactForm.parentNode.insertBefore(messageDiv, contactForm);
+        
+        // 5秒後に自動削除
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.remove();
+            }
+        }, 5000);
     }
 
     // ==========================================
@@ -348,6 +476,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     console.log('%c M4M AGENCY ', 'background: linear-gradient(135deg, #2a2a2a 0%, #000000 100%); color: white; font-size: 20px; padding: 10px;');
     console.log('Website initialized successfully!');
+    
+    // EmailJS設定確認
+    if (typeof emailjs !== 'undefined') {
+        console.log('✅ EmailJS loaded successfully');
+    } else {
+        console.warn('⚠️ EmailJS not loaded');
+    }
 });
 
 // ==========================================

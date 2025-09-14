@@ -1,0 +1,51 @@
+<!-- このファイルはNetlify用のフォーム設定版です -->
+<!-- 使用する場合は、このファイルをindex.htmlにリネームしてください -->
+
+<!-- フォーム部分のみの変更箇所 -->
+<form class="contact-form" id="contactForm" netlify>
+    <div class="form-group">
+        <label for="name">お名前 *</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="email">メールアドレス *</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="company">会社名</label>
+        <input type="text" id="company" name="company">
+    </div>
+    
+    <div class="form-group">
+        <label for="service">ご希望のサービス</label>
+        <select id="service" name="service">
+            <option value="">選択してください</option>
+            <option value="apparel">アパレル制作</option>
+            <option value="printing">プリント加工</option>
+            <option value="design">デザイン制作</option>
+            <option value="digital">デジタルデザイン</option>
+            <option value="photography">梱包</option>
+            <option value="other">その他</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="message">メッセージ *</label>
+        <textarea id="message" name="message" rows="4" required placeholder="ご相談内容をお聞かせください"></textarea>
+    </div>
+    
+    <button type="submit" class="submit-btn">
+        <span>送信する</span>
+    </button>
+</form>
+
+<!-- 
+Netlify Forms の特徴：
+1. netlify 属性を追加するだけで動作
+2. Netlifyでホスティングする場合のみ利用可能
+3. 設定不要、完全無料
+4. 送信されたメールはNetlifyのダッシュボードで確認可能
+5. メール通知も設定可能
+-->
